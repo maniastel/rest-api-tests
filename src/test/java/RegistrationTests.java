@@ -22,8 +22,8 @@ public class RegistrationTests {
                 .log().status()
                 .log().body()
                 .statusCode(200)
-                .body("id", greaterThan(0))
-                .body("token", notNullValue());
+                .body("id", is(greaterThan(0)))
+                .body("token", is(notNullValue()));
     }
 
     @Test
