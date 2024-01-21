@@ -8,10 +8,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static helpers.CustomAllureListener.withCustomTemplates;
+
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
 import static org.junit.jupiter.api.Assertions.*;
 import static specs.RegisterSpec.*;
 
@@ -35,10 +34,8 @@ public class RegistrationTests {
        RegisterResponseModel response = step("Send request", () ->
                given(registerRequestSpec)
                    .body(regData)
-
                .when()
                    .post()
-
                .then()
                    .spec(registerResponseSpec)
                    .extract().as(RegisterResponseModel.class));
@@ -60,10 +57,8 @@ public class RegistrationTests {
         RegisterErrorModel response = step("Send request", () ->
         given(registerRequestSpec)
                 .body(regData).
-
         when()
                 .post().
-
         then()
                 .spec(errorResponseSpec)
                 .extract().as(RegisterErrorModel.class));
@@ -82,13 +77,12 @@ public class RegistrationTests {
         RegisterErrorModel response = step("Send request", () ->
         given(registerRequestSpec)
                 .body(regData).
-
         when()
                 .post().
-
         then()
                 .spec(errorResponseSpec)
                 .extract().as(RegisterErrorModel.class));
+
         step("Check response", () ->
                 assertEquals("Missing password", response.getError()));
     }
@@ -100,13 +94,12 @@ public class RegistrationTests {
         RegisterErrorModel response = step("Send request", () ->
         given(registerRequestSpec)
                 .body("").
-
         when()
                 .post().
-
         then()
                 .spec(errorResponseSpec)
                 .extract().as(RegisterErrorModel.class));
+
         step("check response", () ->
                 assertEquals("Missing email or username", response.getError()));
     }
@@ -121,13 +114,12 @@ public class RegistrationTests {
         RegisterErrorModel response = step("Send request", () ->
         given(registerRequestSpecWithoutHeader)
                 .body(regData).
-
         when()
                 .post().
-
         then()
                 .spec(errorResponseSpec)
                 .extract().as(RegisterErrorModel.class));
+
         step("Check response", () ->
                 assertEquals("Missing email or username", response.getError()));
     }
